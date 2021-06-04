@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="user.length !== 0 "
     v-model="drawer"
     :mini-variant.sync="mini"
     permanent

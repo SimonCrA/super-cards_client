@@ -7,14 +7,14 @@
     >
       <v-slide-group
         v-model="model"
-        class="pa-4"
+        class="pa-6"
         center-active
         show-arrows
       >
         <v-slide-item
-          v-for="n in 15"
-          :key="n"
-          v-slot="{ active }"
+          v-for="card in cards"
+          :key="card._id"
+          v-slot="{ }"
         >
           <!-- <v-card
             :color="active ? 'primary' : 'grey lighten-1'"
@@ -48,18 +48,19 @@
             </v-scale-transition>
           </v-card> -->
           <v-card
-            color="grey lighten-1"
+            color="deep-purple lighten-5"
             class="ma-4"
             height="450"
             width="250"
           >
-            <v-row
+            <v-content-card :cardContent="card"></v-content-card>
+            <v-footer-card :cardContent="card"></v-footer-card>
+            <!-- <v-row
               v-if="active === false"
-              class="fill-height"
+              class="fill-height ma-0"
               align="center"
             >
-              <v-content-card></v-content-card>
-            </v-row>
+            </v-row> -->
           </v-card>
         </v-slide-item>
       </v-slide-group>
@@ -69,11 +70,16 @@
 
 <script>
 import SGContentCard from '@/components/SlideGroup/SGContentCard.vue';
+import SGFooter from '@/components/SlideGroup/SGFooter.vue';
 
 export default {
   name: 'SlideGroup',
+  props: {
+    cards: Array,
+  },
   components: {
     'v-content-card': SGContentCard,
+    'v-footer-card': SGFooter,
   },
   data: () => ({
     model: null,

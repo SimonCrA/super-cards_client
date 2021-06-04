@@ -28,6 +28,15 @@ export const user = {
           (error) => Promise.reject(error.response),
         );
     },
+    async deleteUserData({ commit }) {
+      try {
+        const respDeleteUSerService = await UserService.deleteUser();
+        console.log(respDeleteUSerService);
+        commit('deleteUserData');
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   mutations: {
     setUserData(state, userData) {
@@ -36,6 +45,9 @@ export const user = {
     updateUserSuccess(state, userData) {
       state.user.pop();
       state.user.push(userData);
+    },
+    deleteUserData(state) {
+      state.user.pop();
     },
   },
 };

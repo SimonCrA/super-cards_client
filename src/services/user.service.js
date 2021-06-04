@@ -15,6 +15,12 @@ class UserService {
     const response = await jwtInterceptor.patch(`users/${userId}`, body);
     return response;
   }
+
+  async deleteUser() {
+    const userId = store.getters['auth/getLoggedUserId'];
+    const response = await jwtInterceptor.delete(`users/delete/${userId}`);
+    return response;
+  }
 }
 
 export default new UserService();
