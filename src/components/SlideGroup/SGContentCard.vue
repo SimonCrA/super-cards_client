@@ -6,23 +6,23 @@
         tile
       >
         <v-icon
-          size="60"
-          color="deep-purple accent-4"
+          size="50"
+          :color="cardContent.iconColor"
         >
-          mdi-tree
+          {{cardContent.icon}}
         </v-icon>
       </v-avatar>
-      <h3 class="mt-6">Title</h3>
+      <h3 class="mt-6" :style="{color: cardContent.textColor}">{{cardContent.title}}</h3>
       <v-alert
         border="top"
         dense
-        :color="cardContent.itemsColor"
+        :color="cardContent.barColor"
         dark
       >
       </v-alert>
       <v-sheet
         class="text-center mx-auto"
-        :color="cardContent.textColor"
+        :color="cardContent.cardColor"
         elevation="20"
         height="280"
         rounded
@@ -30,26 +30,6 @@
         v-html="compiledMarkdown"
       ></v-sheet>
       <v-divider class="mt-3"></v-divider>
-      <!-- <v-bottom-navigation
-        v-model="value"
-        class="mt-2"
-        :background-color="cardContent.itemsColor"
-        dark
-        height="50px"
-      >
-        <v-btn value="recent">
-          <span>Archive</span>
-
-          <v-icon>mdi-package-down</v-icon>
-        </v-btn>
-
-        <v-btn value="favorites">
-          <span>Edit</span>
-
-          <v-icon>mdi-square-edit-outline</v-icon>
-        </v-btn>
-      </v-bottom-navigation> -->
-
   </v-container>
 </template>
 

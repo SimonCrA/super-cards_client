@@ -13,7 +13,6 @@ export const card = {
     async getCards({ commit }, status) {
       try {
         const respCardService = await CardService.getCardListByUser(status);
-        console.log(respCardService);
         if (status === true) {
           commit('setActiveCards', respCardService.data.cards);
         } else {
@@ -24,30 +23,55 @@ export const card = {
       }
     },
     async createCard({ commit }, body) {
-      try {
-        const respCreateCardService = await CardService.createCard(body);
-        console.log(respCreateCardService);
-        commit('updateCardState');
-      } catch (error) {
-        console.log(error);
-      }
+      return CardService.createCard(body)
+        .then(
+          (success) => {
+            commit('updateCardState');
+            return Promise.resolve(success.data.card);
+          },
+          (error) => Promise.reject(error.response),
+        );
     },
-    async editCard({ commit }, cardId, body) {
-      try {
-        const respUpdateCardService = await CardService.updateCardById(cardId, body);
-        console.log(respUpdateCardService);
-        commit('updateCardState');
-      } catch (error) {
-        console.log(error);
-      }
+    async editCard({ commit }, data) {
+      return CardService.updateCardById(data.id, data.body)
+        .then(
+          (success) => {
+            commit('updateCardState');
+            return Promise.resolve(success.data.card);
+          },
+          (error) => Promise.reject(error.response),
+        );
     },
-    async archiveCard(cardId) {
-      try {
-        const respDisableCardService = await CardService.disableCardById(cardId);
-        console.log(respDisableCardService);
-      } catch (error) {
-        console.log(error);
-      }
+    async archiveCard({ commit }, cardId) {
+      return CardService.disableCardById(cardId)
+        .then(
+          (success) => {
+            commit('updateCardState');
+            return Promise.resolve(success.data.card);
+          },
+          (error) => Promise.reject(error.response),
+        );
+    },
+    async unArchiveCard({ commit }, cardId) {
+      const body = { status: true };
+      return CardService.updateCardById(cardId, body)
+        .then(
+          (success) => {
+            commit('updateCardState');
+            return Promise.resolve(success.data.card);
+          },
+          (error) => Promise.reject(error.response),
+        );
+    },
+    async deleteCard({ commit }, cardId) {
+      return CardService.deleteCardById(cardId)
+        .then(
+          (success) => {
+            commit('updateCardState');
+            return Promise.resolve(success.data.card);
+          },
+          (error) => Promise.reject(error.response),
+        );
     },
   },
   mutations: {

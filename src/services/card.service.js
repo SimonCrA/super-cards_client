@@ -29,6 +29,11 @@ class UserService {
     const response = await jwtInterceptor.delete(`cards/${id}`);
     return response;
   }
+
+  async deleteCardById(id) {
+    const response = await jwtInterceptor.delete(`cards/delete/${id}`);
+    return response;
+  }
 }
 
 export default new UserService();

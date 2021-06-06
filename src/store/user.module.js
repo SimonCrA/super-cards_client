@@ -12,7 +12,6 @@ export const user = {
     async getUserData({ commit }) {
       try {
         const respUserService = await UserService.getLoggedInUserData();
-        console.log(respUserService);
         commit('setUserData', respUserService.data.user);
       } catch (error) {
         console.log(error);

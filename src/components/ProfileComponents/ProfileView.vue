@@ -41,6 +41,7 @@
           </v-card-text>
 
           <v-text-field
+            class="ma-6"
             v-model="deleteField"
             prepend-icon="mdi-lock"
           ></v-text-field>

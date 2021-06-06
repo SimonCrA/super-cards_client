@@ -7,68 +7,76 @@
         elevation="20"
       >
         <v-sheet
-        v-if="cardContent.status === true"
+          v-if="cardContent.status === true"
           rounded
           width="100%"
           height="50px"
-          :color="cardContent.itemsColor"
+          :color="cardContent.footerColor"
           class="my-auto text-center"
 
         >
-          <v-btn
-            class="mx-8 my-2"
-            icon
-          >
-            <v-icon size="36px">
-              mdi-package-down
-            </v-icon>
-          </v-btn>
-          <v-btn
-            class="mx-8 my-2"
-            icon
-          >
-            <v-icon size="36px">
-              mdi-square-edit-outline
-            </v-icon>
-          </v-btn>
+          <v-row justify="center">
+            <v-col md="4">
+              <v-confirmation-dialog
+                icon="mdi-package-down"
+                action="archive"
+                service="archiveCard"
+                :id="cardContent._id"
+              ></v-confirmation-dialog>
+            </v-col>
+            <v-col md="4">
+              <v-create-card icon="mdi-square-edit-outline" type="edit" :id="cardContent._id">
+              </v-create-card>
+            </v-col>
+          </v-row>
         </v-sheet>
         <v-sheet
           v-else-if="cardContent.status === false"
           rounded
           width="100%"
           height="50px"
-          :color="cardContent.itemsColor"
+          :color="cardContent.footerColor"
           class="my-auto text-center"
 
         >
-          <v-btn
-            class="mx-8 my-2"
-            icon
-          >
-            <v-icon size="36px">
-              mdi-package-up
-            </v-icon>
-          </v-btn>
-          <v-btn
-            class="mx-8 my-2"
-            icon
-          >
-            <v-icon size="36px">
-              mdi-delete
-            </v-icon>
-          </v-btn>
+          <v-row justify="center">
+            <v-col md="4">
+              <v-confirmation-dialog
+                icon="mdi-package-up"
+                action="unarchive"
+                service="unArchiveCard"
+                :id="cardContent._id"
+              ></v-confirmation-dialog>
+            </v-col>
+            <v-col md="4">
+              <v-confirmation-dialog
+                icon="mdi-delete"
+                action="delete"
+                service="deleteCard"
+                :id="cardContent._id"
+              ></v-confirmation-dialog>
+            </v-col>
+          </v-row>
         </v-sheet>
       </v-footer>
   </v-container>
 </template>
 
 <script>
+import ConfirmationDialog from '../Shared/ConfirmationDialog.vue';
+import DialogCard from '../Cards/DialogCard.vue';
+
 export default {
   name: 'SGFooter',
   props: {
     cardContent: Object,
   },
+  components: {
+    'v-confirmation-dialog': ConfirmationDialog,
+    'v-create-card': DialogCard,
+  },
   data: () => ({}),
+
 };
 </script>
 

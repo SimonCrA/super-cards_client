@@ -2,10 +2,10 @@
   <v-container class="text-center">
     <v-pagination
       v-model="localPage"
-      :length="5"
+      :length="cardsLength"
       prev-icon="mdi-menu-left"
-      :next-icon="localPage === 5 ? 'mdi-plus-thick' : 'mdi-menu-right' "
-      @click="sendPage"
+      next-icon="mdi-menu-right"
+      @input="clicked"
     ></v-pagination>
   </v-container>
 </template>
@@ -15,12 +15,13 @@ export default {
   name: 'Pagination',
   props: {
     page: Number,
+    cardsLength: Number,
   },
   data: () => ({
-    localPage: 2,
+    localPage: 1,
   }),
   methods: {
-    sendPage() {
+    clicked() {
       this.$emit('pageClicked', this.localPage);
     },
   },

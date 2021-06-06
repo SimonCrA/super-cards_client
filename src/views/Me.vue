@@ -1,8 +1,11 @@
 <template>
 <v-container v-if="cards.length !== 0">
   <v-nav-drawer></v-nav-drawer>
-  <v-pagination :page="page" @pageClicked="pageEvent"></v-pagination>
-  <v-slide-group :cards="cards"></v-slide-group>
+  <v-pagination @pageClicked="pageEvent" :cardsLength="cards.length"></v-pagination>
+  <div class="center">
+    <v-create-card type="create"></v-create-card>
+  </div>
+  <v-slide-group :cards="cards" :clicked="clicked"></v-slide-group>
 </v-container>
 </template>
 
@@ -11,6 +14,7 @@ import { mapState } from 'vuex';
 import NavDrawer from '../components/Shared/NavDrawer.vue';
 import SlideGroupIndex from '../components/SlideGroup/SGIndex.vue';
 import Pagination from '../components/Shared/Pagination.vue';
+import DialogCard from '../components/Cards/DialogCard.vue';
 
 export default {
   name: 'Me',
@@ -18,12 +22,13 @@ export default {
     'v-nav-drawer': NavDrawer,
     'v-slide-group': SlideGroupIndex,
     'v-pagination': Pagination,
+    'v-create-card': DialogCard,
   },
   computed: {
     ...mapState('card', ['cards']),
   },
   data: () => ({
-    page: 3,
+    clicked: 0,
   }),
   mounted() {
     this.$store.dispatch('user/getUserData');
@@ -31,7 +36,10 @@ export default {
   },
   methods: {
     pageEvent(data) {
-      console.log('en home', data);
+      this.clicked = data - 1;
+    },
+    handleCreateCard() {
+
     },
   },
 
@@ -39,5 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.center {
+  text-align: center;
+}
 </style>
