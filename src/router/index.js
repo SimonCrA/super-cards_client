@@ -5,7 +5,6 @@ import Home from '../views/Home.vue';
 import Me from '../views/Me.vue';
 import Profile from '../views/Profile.vue';
 import Archive from '../views/Archive.vue';
-import DeleteAccount from '../views/DeleteAccount.vue';
 
 Vue.use(VueRouter);
 
@@ -32,12 +31,6 @@ const routes = [
     path: '/archive',
     name: 'Archive',
     component: Archive,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/delete',
-    name: 'DeleteAccount',
-    component: DeleteAccount,
     meta: { requiresAuth: true },
   },
 ];
