@@ -39,7 +39,7 @@
                     <validation-provider
                       v-slot="{ errors }"
                       name="Name"
-                      rules="required|min:4|alpha"
+                      rules="required|min:2|alpha"
                     >
                       <v-text-field
                         v-model="userData.name"
@@ -51,7 +51,7 @@
                     <validation-provider
                       v-slot="{ errors }"
                       name="Lastname"
-                      rules="required|min:4|alpha"
+                      rules="required|min:3|alpha"
                     >
                       <v-text-field
                         v-model="userData.lastname"
@@ -138,7 +138,7 @@ extend('email', {
 
 extend('min', {
   ...min,
-  message: '{_field_} must be 8 alphaNumerics characters min',
+  message: '{_field_} must be 3 alphaNumerics characters min',
 });
 
 extend('alpha', {

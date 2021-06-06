@@ -1,9 +1,16 @@
 <template>
-  <v-container v-if="cardsArchived.length !== 0">
+  <v-container>
     <v-nav-drawer></v-nav-drawer>
     <h1 class="text-center">Archived Cards</h1>
-    <v-pagination @pageClicked="pageEvent" :cardsLength="cardsArchived.length"></v-pagination>
-    <v-slide-group :cards="cardsArchived" :clicked="clicked"></v-slide-group>
+    <v-pagination
+       v-if="cardsArchived.length !== 0"
+      @pageClicked="pageEvent"
+      :cardsLength="cardsArchived.length"
+    ></v-pagination>
+    <v-slide-group
+      v-if="cardsArchived.length !== 0"
+      :cards="cardsArchived" :clicked="clicked"
+    ></v-slide-group>
   </v-container>
 </template>
 

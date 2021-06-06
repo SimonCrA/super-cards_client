@@ -1,11 +1,15 @@
 <template>
-<v-container v-if="cards.length !== 0">
+<v-container>
   <v-nav-drawer></v-nav-drawer>
-  <v-pagination @pageClicked="pageEvent" :cardsLength="cards.length"></v-pagination>
+  <v-pagination
+    v-if="cards.length !== 0"
+    @pageClicked="pageEvent"
+    :cardsLength="cards.length">
+  </v-pagination>
   <div class="center">
     <v-create-card type="create"></v-create-card>
   </div>
-  <v-slide-group :cards="cards" :clicked="clicked"></v-slide-group>
+  <v-slide-group v-if="cards.length !== 0" :cards="cards" :clicked="clicked"></v-slide-group>
 </v-container>
 </template>
 
